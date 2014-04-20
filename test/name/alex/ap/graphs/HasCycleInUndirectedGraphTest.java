@@ -1,4 +1,4 @@
-package name.alex.ap;
+package name.alex.ap.graphs;
 
 import name.alex.ap.graphs.Graphs;
 import name.alex.ap.graphs.UndirectedGraph;

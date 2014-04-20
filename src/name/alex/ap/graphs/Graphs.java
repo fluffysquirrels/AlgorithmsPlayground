@@ -7,59 +7,78 @@ import java.util.Map;
 import java.util.Set;
 
 public class Graphs {
+
     private Graphs(){}
 
-    private static enum VisitedState{
-        NotVisited,
-        BeingTraversed,
-        BeenTraversed,
-    }
-
-    public static boolean hasCycle(UndirectedGraph g) {
-        HashMap<Integer, VisitedState> visitedVertexMap = new HashMap<>();
+    public static <TOutput> TOutput depthFirstSearch(UndirectedGraph g, DfsVisitor visitor){
+        HashMap<Integer, VertexVisitedState> visitedVertexMap = new HashMap<>();
         HashSet<UndirectedEdge> traversedEdgeSet = new HashSet<>();
-
+        
+        visitor.setDfsState(g, visitedVertexMap, traversedEdgeSet);
+        
         for(Vertex v: g.getVertices()) {
-            boolean hcrv =
-                    hasCycleRecursive(g, visitedVertexMap, traversedEdgeSet,
+            TOutput vertexVisitOutput =
+                    depthFirstSearchRecursive(
+                            g, visitedVertexMap, traversedEdgeSet,
+                            visitor,
                             v.getIndex());
-            if(hcrv) {
-                return true;
+            if(vertexVisitOutput != null) {
+                return vertexVisitOutput;
             }
         }
 
-        return false;
+        return null;
     }
-
-    private static boolean hasCycleRecursive(
-            UndirectedGraph g,
-            Map<Integer, VisitedState> visitedVertexMap,
-            Set<UndirectedEdge> traversedEdgeSet,
+    
+    private static <TOutput> TOutput depthFirstSearchRecursive(
+            UndirectedGraph g, HashMap<Integer, VertexVisitedState> visitedVertexMap,
+            HashSet<UndirectedEdge> traversedEdgeSet, DfsVisitor visitor,
             Integer currVertexIndex) {
 
-        VisitedState vertexState = visitedVertexMap.get(currVertexIndex);
-        if(vertexState == VisitedState.BeingTraversed) {
-            return true;
-        }
-        if(vertexState == VisitedState.BeenTraversed) {
-            return false;
+        VertexVisitedState vertexState = visitedVertexMap.get(currVertexIndex);
+
+        if(vertexState == null){
+            vertexState = VertexVisitedState.NotVisited;
         }
 
-        visitedVertexMap.put(currVertexIndex, VisitedState.BeingTraversed);
+        TOutput currVertexOutput = (TOutput) visitor.visitVertex(currVertexIndex, vertexState);
+
+        if(currVertexOutput != null) {
+            return currVertexOutput;
+        }
+
+        visitedVertexMap.put(currVertexIndex, VertexVisitedState.BeingTraversed);
         for(UndirectedEdge outEdge: g.getEdgesFromVertex(currVertexIndex)) {
             if(traversedEdgeSet.contains(outEdge)){
                 continue;
             }
             traversedEdgeSet.add(outEdge);
             
-            boolean hcrv = hasCycleRecursive(g, visitedVertexMap, traversedEdgeSet,
-                                outEdge.getTo());
-            if(hcrv) {
-                return true;
+            TOutput nextVertexOutput =
+                    depthFirstSearchRecursive(g, visitedVertexMap,
+                            traversedEdgeSet, visitor, outEdge.getTo());
+            if(nextVertexOutput != null){
+                return nextVertexOutput;
             }
         }
-        visitedVertexMap.put(currVertexIndex, VisitedState.BeenTraversed);
+        visitedVertexMap.put(currVertexIndex, VertexVisitedState.BeenTraversed);
         
-        return false;
+        return null;
+    }
+
+    public static Boolean hasCycle(UndirectedGraph g) {
+        Boolean foundCycle = depthFirstSearch(g, new DfsVisitor<Boolean>() {
+                @Override
+                public Boolean visitVertex(Integer currVertexIndex, VertexVisitedState vertexState){
+                    if(vertexState == VertexVisitedState.BeingTraversed) {
+                        return true;
+                    }
+                    
+                    return null;
+                }
+            }
+        );
+
+        return foundCycle != null && foundCycle == true;
     }
 }
