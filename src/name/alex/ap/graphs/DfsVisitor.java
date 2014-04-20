@@ -17,7 +17,10 @@ public abstract class DfsVisitor<TOutput> {
         this.traversedEdgeSet = traversedEdgeSet;
     }
 
-    public abstract TOutput visitVertex(Integer currVertexIndex, VertexVisitedState vertexState);
+    public abstract TOutput visitVertex(
+            Integer currVertexIndex,
+            VertexVisitedState vertexState,
+            Integer startVertexIndex);
 
     public UndirectedGraph getG() {
         return g;
