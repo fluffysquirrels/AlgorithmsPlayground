@@ -13,11 +13,7 @@ public class CountConsecutiveNumberRunsTest {
     
     @Test(dataProvider = "getCases")
     public void shouldPass(int[] input, int expectedOutput) {
-        ArrayList<String> inputAsStrings = new ArrayList<>(input.length);
-        for(int n: input) {
-            inputAsStrings.add(Integer.toString(n));
-        }
-        System.out.printf("input:  [%s]\n", joinStrings(inputAsStrings, ", "));
+        System.out.printf("input:  %s\n", StringUtils.arrayAsString(input, 20));
         int output = countConsecutiveNumberRuns(input);
         System.out.printf("output: %d\n", output);
         System.out.printf("expected output: %d\n", expectedOutput);
@@ -26,6 +22,7 @@ public class CountConsecutiveNumberRunsTest {
 
         assertEquals(output, expectedOutput);
     }
+
 
     private static int countConsecutiveNumberRuns(int[] input) {
         if(input.length == 0) {
@@ -45,22 +42,6 @@ public class CountConsecutiveNumberRunsTest {
         return runs;
     }
 
-    public String joinStrings (Collection<String> strings, String separator) {
-        StringBuilder sb = new StringBuilder();
-        boolean first = true;
-
-        for(String s: strings) {
-            if(!first){
-                sb.append(separator);
-            }
-            first = false;
-
-            sb.append(s);
-        }
-
-        return sb.toString();
-    }
-    
     @DataProvider(name = "getCases")
     public Object[][] getCases() {
         return new Object[][] {
