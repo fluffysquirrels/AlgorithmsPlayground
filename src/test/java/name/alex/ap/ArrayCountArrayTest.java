@@ -16,7 +16,7 @@ public class ArrayCountArrayTest {
     private static final int ARRAY_LENGTH = 10;
 
     @Test
-    public void solveItTest() {
+    public void solveArrayCountArrayTest() {
         Collection<int[]> solutions = solveIt();
         System.out.println();
         System.out.printf("Found %d solution(s):\n", solutions.size());

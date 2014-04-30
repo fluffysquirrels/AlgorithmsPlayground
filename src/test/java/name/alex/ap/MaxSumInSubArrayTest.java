@@ -73,9 +73,6 @@ public class MaxSumInSubArrayTest {
 
         allExamples.add(getRandomExample(10, 1000000));
         allExamples.add(getRandomExample(11, 1000000));
-        allExamples.add(getRandomExample(12, 1000000));
-        allExamples.add(getRandomExample(13, 1000000));
-        allExamples.add(getRandomExample(14, 1000000));
 
         return allExamples.toArray(new Object[allExamples.size()][0]);
     }

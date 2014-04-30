@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class GetComponentsInUndirectedGraphTest {
     @Test
-    public void doIt() {
+    public void getComponentsInUndirectedGraphExample() {
         UndirectedGraph g = new UndirectedGraph();
         
         g.ensureVertex(0);
