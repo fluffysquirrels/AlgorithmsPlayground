@@ -87,7 +87,13 @@ public class ttt {
     }
     
     /* TODO:
-        simple game
+        player one cannot move when game is over.
+        player two cannot move when game is over.
+        player two wins with horizontal row.
+        player one wins with vertical column.
+        player two wins with vertical column.
+        player one wins with diagonal.
+        player two wins with diagonal.
         bounds checks on CellCoords.{x, y}.
     
     
