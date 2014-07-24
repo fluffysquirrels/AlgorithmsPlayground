@@ -62,11 +62,34 @@ public class ttt {
         game.playerTwoMove(anyCell);
     }
 
+    @Test
+    public void When_player_one_fills_a_horizontal_row_then_game_ends() {
+        test_player_one_horizontal_row_example(0, 1);
+        test_player_one_horizontal_row_example(1, 2);
+        test_player_one_horizontal_row_example(2, 0);
+    }
+
+    private static void test_player_one_horizontal_row_example(int yPlayerOne, int yPlayerTwo) {
+        final Game game = new Game();
+
+        game.playerOneMove(new CellCoords(0,yPlayerOne));
+        game.playerTwoMove(new CellCoords(0,yPlayerTwo));
+        game.playerOneMove(new CellCoords(1,yPlayerOne));
+        game.playerTwoMove(new CellCoords(1,yPlayerTwo));
+
+        assertThat("Expected game not to be over before player one completes their row",
+                game.isOver(),
+                is(false));
+        game.playerOneMove(new CellCoords(2,yPlayerOne));
+        assertThat("Expected game to be over once player one completes their row",
+                game.isOver(),
+                is(true));
+    }
+    
     /* TODO:
         simple game
         bounds checks on CellCoords.{x, y}.
     
     
      */
-    
 }

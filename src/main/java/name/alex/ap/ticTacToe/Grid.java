@@ -11,8 +11,8 @@ import java.util.Arrays;
 class Grid {
     private final CellState[] cells;
 
-    private static final int WIDTH = 3;
-    private static final int HEIGHT = 3;
+    public static final int WIDTH = 3;
+    public static final int HEIGHT = 3;
 
     public Grid() {
         this.cells = createCells();
