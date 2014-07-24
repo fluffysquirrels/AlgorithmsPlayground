@@ -17,12 +17,15 @@ public class Game {
     }
 
     private boolean playerOneHasWon() {
-        return playerHasWonWithHorizontalRow(CellState.PlayerOne);
-        // TODO: Vertical columns, diagonals
+        return playerHasWon(CellState.PlayerOne);
     }
-    
+
     private boolean playerTwoHasWon() {
-        return playerHasWonWithHorizontalRow(CellState.PlayerTwo);
+        return playerHasWon(CellState.PlayerTwo);
+    }
+
+    private boolean playerHasWon(final CellState player) {
+        return playerHasWonWithHorizontalRow(player);
         // TODO: Vertical columns, diagonals
     }
 
