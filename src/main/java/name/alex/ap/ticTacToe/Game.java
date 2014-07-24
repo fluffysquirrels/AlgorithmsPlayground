@@ -13,7 +13,7 @@ public class Game {
     public boolean isOver(){
         return    playerOneHasWon()
                || playerTwoHasWon();
-        // TODO: player two wins, draws
+        // TODO: draws
     }
 
     private boolean playerOneHasWon() {
@@ -32,7 +32,7 @@ public class Game {
     private boolean playerHasWonWithHorizontalRow(CellState player) {
         for(int y = 0; y < Grid.HEIGHT; ++y){
             for(int x = 0; x < Grid.WIDTH; ++x) {
-                if(grid.get(new CellCoords(x, y)) != player) {
+                if(getCell(new CellCoords(x, y)) != player) {
                     // Player hasn't won with this row, break out of the for(x) loop,
                     // and try the next row with the for(y) loop.
                     break;

@@ -146,6 +146,7 @@ public class ttt {
         player two wins with vertical column.
         player one wins with diagonal.
         player two wins with diagonal.
+        Game is over when there is a draw (all cells filled).
         bounds checks on CellCoords.{x, y}.
     
     
