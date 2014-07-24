@@ -11,19 +11,25 @@ public class Game {
     private int numMoves = 0;
 
     public boolean isOver(){
-        return playerOneHasWon();
+        return    playerOneHasWon()
+               || playerTwoHasWon();
         // TODO: player two wins, draws
     }
 
     private boolean playerOneHasWon() {
-        return playerOneHasWonWithHorizontalRow();
+        return playerHasWonWithHorizontalRow(CellState.PlayerOne);
+        // TODO: Vertical columns, diagonals
+    }
+    
+    private boolean playerTwoHasWon() {
+        return playerHasWonWithHorizontalRow(CellState.PlayerTwo);
         // TODO: Vertical columns, diagonals
     }
 
-    private boolean playerOneHasWonWithHorizontalRow() {
+    private boolean playerHasWonWithHorizontalRow(CellState player) {
         for(int y = 0; y < Grid.HEIGHT; ++y){
             for(int x = 0; x < Grid.WIDTH; ++x) {
-                if(grid.get(new CellCoords(x, y)) != CellState.PlayerOne) {
+                if(grid.get(new CellCoords(x, y)) != player) {
                     // Player hasn't won with this row, break out of the for(x) loop,
                     // and try the next row with the for(y) loop.
                     break;

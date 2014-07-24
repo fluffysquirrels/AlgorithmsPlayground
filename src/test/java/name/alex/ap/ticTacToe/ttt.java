@@ -64,6 +64,8 @@ public class ttt {
 
     @Test
     public void When_player_one_fills_a_horizontal_row_then_game_ends() {
+        // Test all three possible horizontal rows in case there is e.g. an off by
+        // one error somewhere.
         test_player_one_horizontal_row_example(0, 1);
         test_player_one_horizontal_row_example(1, 2);
         test_player_one_horizontal_row_example(2, 0);
@@ -82,6 +84,26 @@ public class ttt {
                 is(false));
         game.playerOneMove(new CellCoords(2,yPlayerOne));
         assertThat("Expected game to be over once player one completes their row",
+                game.isOver(),
+                is(true));
+    }
+    
+    @Test
+    public void When_player_two_fills_a_horizontal_row_then_game_ends() {
+        // Test only one possible horizontal row because we sneakily know this
+        /// re-uses the same code as player one winning.
+
+        game.playerOneMove(new CellCoords(0,0));
+        game.playerTwoMove(new CellCoords(0,1));
+        game.playerOneMove(new CellCoords(1,0));
+        game.playerTwoMove(new CellCoords(1,1));
+        game.playerOneMove(new CellCoords(0,2));
+
+        assertThat("Expected game not to be over before player two completes their row",
+                game.isOver(),
+                is(false));
+        game.playerTwoMove(new CellCoords(2,1));
+        assertThat("Expected game to be over once player two completes their row",
                 game.isOver(),
                 is(true));
     }
