@@ -25,11 +25,15 @@ public class Game {
         return false;
     }
 
-    void playerOneMove(int x, int y) {
-        cells[3 * y + x] = CellState.PlayerOne;
+    public void playerOneMove(CellCoords coords) {
+        cells[getCellIndexFromCoords(coords)] = CellState.PlayerOne;
     }
 
-    CellState getCell(int x, int y) {
-        return cells[3 * y + x];
+    public CellState getCell(CellCoords coords) {
+        return cells[getCellIndexFromCoords(coords)];
+    }
+
+    private static int getCellIndexFromCoords(CellCoords coords) {
+        return 3 * coords.getY() + coords.getX();
     }
 }

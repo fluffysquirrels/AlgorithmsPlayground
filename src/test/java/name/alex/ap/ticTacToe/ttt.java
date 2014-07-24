@@ -12,7 +12,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class ttt {
-    Game game = null;
+    private Game game = null;
+    private static final CellCoords anyCell = new CellCoords(0, 0);
     
     @BeforeTest
     public void beforeTest() {
@@ -26,16 +27,15 @@ public class ttt {
     
     @Test
     public void When_first_player_makes_a_move_we_can_retrieve_it_from_the_grid(){
-        assertThat(game.getCell(0, 0), is(CellState.Empty));
-        
-        game.playerOneMove(0, 0);
-        
-        assertThat(game.getCell(0, 0), is(CellState.PlayerOne));
+        assertThat(game.getCell(anyCell), is(CellState.Empty));
+        game.playerOneMove(anyCell);
+        assertThat(game.getCell(anyCell), is(CellState.PlayerOne));
     }
     
     /* TODO:
-        Cell class for co-ords
+        Grid class?
         simple game
     
      */
+    
 }
