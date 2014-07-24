@@ -25,6 +25,10 @@ class Grid {
     }
 
     public void set(CellCoords coords, CellState value) {
+        if(get(coords) != CellState.Empty) {
+            throw new IllegalStateException("Cannot set a cell that is already filled.");
+        }
+
         cells[getCellIndexFromCoords(coords)] = value;
     }
 

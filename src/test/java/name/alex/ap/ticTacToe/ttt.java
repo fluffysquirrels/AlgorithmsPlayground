@@ -46,7 +46,7 @@ public class ttt {
         game.playerOneMove(anyCell);
         game.playerOneMove(anotherCell);
     }
-    
+
     @Test
     public void Player_two_can_make_a_move_after_player_one_and_we_can_retrieve_both_moves_from_the_grid() {
         game.playerOneMove(anyCell);
@@ -56,8 +56,13 @@ public class ttt {
         assertThat(game.getCell(anotherCell), is(CellState.PlayerTwo));
     }
 
+    @Test(expectedExceptions = IllegalStateException.class)
+    public void Player_cannot_make_a_move_in_a_filled_cell() {
+        game.playerOneMove(anyCell);
+        game.playerTwoMove(anyCell);
+    }
+
     /* TODO:
-        Can't fill in a square that is already filled.
         simple game
         bounds checks on CellCoords.{x, y}.
     
