@@ -11,12 +11,15 @@ import java.util.Arrays;
 class Grid {
     private final CellState[] cells;
 
+    private static final int WIDTH = 3;
+    private static final int HEIGHT = 3;
+
     public Grid() {
         this.cells = createCells();
     }
 
     private static CellState[] createCells() {
-        final CellState[] name = new CellState[9];
+        final CellState[] name = new CellState[WIDTH * HEIGHT];
         Arrays.fill(name, CellState.Empty);
         return name;
     }
@@ -30,6 +33,6 @@ class Grid {
     }
 
     private static int getCellIndexFromCoords(CellCoords coords) {
-        return 3 * coords.getY() + coords.getX();
+        return WIDTH * coords.getY() + coords.getX();
     }
 }
