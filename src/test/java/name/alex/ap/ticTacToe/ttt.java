@@ -7,10 +7,9 @@
 package name.alex.ap.ticTacToe;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.testng.Assert.fail;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class ttt {
@@ -87,7 +86,7 @@ public class ttt {
                 game.isOver(),
                 is(true));
     }
-    
+
     @Test
     public void When_player_two_fills_a_horizontal_row_then_game_ends() {
         // Test only one possible horizontal row because we sneakily know this
@@ -107,11 +106,42 @@ public class ttt {
                 game.isOver(),
                 is(true));
     }
+
+    @Test
+    public void When_player_two_has_won_player_one_cannot_move() {
+        game.playerOneMove(new CellCoords(0,0));
+        game.playerTwoMove(new CellCoords(0,1));
+        game.playerOneMove(new CellCoords(1,0));
+        game.playerTwoMove(new CellCoords(1,1));
+        game.playerOneMove(new CellCoords(0,2));
+        game.playerTwoMove(new CellCoords(2,1));
+
+        try{
+            game.playerOneMove(new CellCoords(2,0));
+            fail("Should not reach this; expected IllegalStateException.");
+        }
+        catch(IllegalStateException expected)
+        {}
+    }
+
+    @Test
+    public void When_player_one_has_won_player_two_cannot_move() {
+        game.playerOneMove(new CellCoords(0,0));
+        game.playerTwoMove(new CellCoords(0,1));
+        game.playerOneMove(new CellCoords(1,0));
+        game.playerTwoMove(new CellCoords(1,1));
+        game.playerOneMove(new CellCoords(2,0));
+        
+
+        try{
+            game.playerTwoMove(new CellCoords(2,1));
+            fail("Should not reach this; expected IllegalStateException.");
+        }
+        catch(IllegalStateException expected)
+        {}
+    }
     
     /* TODO:
-        player one cannot move when game is over.
-        player two cannot move when game is over.
-        player two wins with horizontal row.
         player one wins with vertical column.
         player two wins with vertical column.
         player one wins with diagonal.

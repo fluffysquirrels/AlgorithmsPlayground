@@ -51,7 +51,9 @@ public class Game {
         if(numMoves % 2 == 1) {
             throw new IllegalStateException("It is not player one's turn to move.");
         }
-        
+
+        assertGameNotOver();
+
         grid.set(coords, CellState.PlayerOne);
         ++numMoves;
     }
@@ -60,9 +62,17 @@ public class Game {
         if(numMoves % 2 == 0) {
             throw new IllegalStateException("It is not player two's turn to move.");
         }
-        
+
+        assertGameNotOver();
+
         grid.set(coords, CellState.PlayerTwo);
         ++numMoves;
+    }
+
+    private void assertGameNotOver() throws IllegalStateException {
+        if(isOver()) {
+            throw new IllegalStateException("Cannot move when game is over.");
+        }
     }
 
     public CellState getCell(CellCoords coords) {
