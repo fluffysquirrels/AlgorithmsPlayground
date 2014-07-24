@@ -19,9 +19,9 @@ class Grid {
     }
 
     private static CellState[] createCells() {
-        final CellState[] name = new CellState[WIDTH * HEIGHT];
-        Arrays.fill(name, CellState.Empty);
-        return name;
+        final CellState[] cells = new CellState[WIDTH * HEIGHT];
+        Arrays.fill(cells, CellState.Empty);
+        return cells;
     }
 
     public void set(CellCoords coords, CellState value) {
