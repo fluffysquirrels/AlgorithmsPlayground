@@ -9,31 +9,17 @@ package name.alex.ap.ticTacToe;
 import java.util.Arrays;
 
 public class Game {
-    private final CellState[] cells;
+    private final Grid grid = new Grid();
 
-    public Game() {
-        this.cells = createCells();
-    }
-
-    private static CellState[] createCells() {
-        final CellState[] name = new CellState[9];
-        Arrays.fill(name, CellState.Empty);
-        return name;
-    }
-    
     public boolean isOver(){
         return false;
     }
 
     public void playerOneMove(CellCoords coords) {
-        cells[getCellIndexFromCoords(coords)] = CellState.PlayerOne;
+        grid.set(coords, CellState.PlayerOne);
     }
 
     public CellState getCell(CellCoords coords) {
-        return cells[getCellIndexFromCoords(coords)];
-    }
-
-    private static int getCellIndexFromCoords(CellCoords coords) {
-        return 3 * coords.getY() + coords.getX();
+        return grid.get(coords);
     }
 }

@@ -33,7 +33,6 @@ public class ttt {
     }
     
     /* TODO:
-        Grid class?
         simple game
     
      */
