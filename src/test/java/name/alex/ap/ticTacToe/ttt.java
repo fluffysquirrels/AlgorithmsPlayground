@@ -105,6 +105,12 @@ public class ttt {
         assertThat("Expected game to be over once player two completes their row",
                 game.isOver(),
                 is(true));
+
+        assertThat(game.getGridAsString(), is(
+                "11-\n" +
+                "222\n" +
+                "1--\n"
+        ));
     }
 
     @Test
@@ -151,6 +157,12 @@ public class ttt {
         assertThat("Expected game to be over once player two completes their column",
                 game.isOver(),
                 is(true));
+
+        assertThat(game.getGridAsString(), is(
+                "121\n" +
+                "12-\n" +
+                "-2-\n"
+        ));
     }
     
     @Test
