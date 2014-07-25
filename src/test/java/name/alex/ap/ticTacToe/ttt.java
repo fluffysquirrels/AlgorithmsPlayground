@@ -22,7 +22,7 @@ public class ttt {
     public void beforeEachTest() {
         game = new Game();
     }
-    
+
     @Test
     public void A_new_game_should_not_be_over() {
         assertThat(game.isOver(), is(false));
@@ -186,7 +186,33 @@ public class ttt {
         catch(IllegalStateException expected)
         {}
     }
-    
+
+    @Test
+    public void New_game_grid_string_should_be() {
+        assertThat(game.getGridAsString(), is(
+                "---\n" +
+                "---\n" +
+                "---\n"
+        ));
+    }
+
+    @Test
+    public void Complex_game_grid_string_should_be() {
+        game.playerOneMove(new CellCoords(0, 0));
+        game.playerTwoMove(new CellCoords(1, 0));
+        game.playerOneMove(new CellCoords(1, 1));
+        game.playerTwoMove(new CellCoords(2, 1));
+        game.playerOneMove(new CellCoords(0, 2));
+        game.playerTwoMove(new CellCoords(1, 2));
+        game.playerOneMove(new CellCoords(2, 2));
+
+        assertThat(game.getGridAsString(), is(
+                "12-\n" +
+                "-12\n" +
+                "121\n"
+        ));
+    }
+
     /* TODO:
         player one wins with diagonal.
         player two wins with diagonal.

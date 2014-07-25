@@ -39,4 +39,20 @@ class Grid {
     private static int getCellIndexFromCoords(CellCoords coords) {
         return WIDTH * coords.getY() + coords.getX();
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        
+        for(int y = 0; y < Grid.HEIGHT; ++y) {
+            for(int x = 0; x < Grid.WIDTH; ++x) {
+                final CellState cell = get(new CellCoords(x, y));
+                sb.append(cell.getCharacterInGridString());
+            }
+
+            sb.append("\n");
+        }
+        
+        return sb.toString();
+    }
 }

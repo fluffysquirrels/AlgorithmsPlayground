@@ -100,4 +100,7 @@ public class Game {
         return grid.get(coords);
     }
 
+    public String getGridAsString() {
+        return grid.toString();
+    }
 }
