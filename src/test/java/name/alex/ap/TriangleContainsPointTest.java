@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 // origin lies inside the triangle formed by the three points.
 public class TriangleContainsPointTest {
     @Test(dataProvider = "getExamples")
-    public void testIt(Point2D p1, Point2D p2, Point2D p3, Point2D x, Boolean expected) {
+    public void isPointInTriangleExamples(Point2D p1, Point2D p2, Point2D p3, Point2D x, Boolean expected) {
         Boolean result = Triangles.isPointInTriangle(p1, p2, p3, x);
         printResult(p1, p2, p3, x, result, expected);
         assertEquals(result, expected);

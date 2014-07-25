@@ -6,13 +6,8 @@ import static org.testng.Assert.*;
 import org.testng.annotations.*;
 
 public class CountConsecutiveNumberRunsTest {
-    
-    public CountConsecutiveNumberRunsTest() {
-    }
-
-    
     @Test(dataProvider = "getCases")
-    public void shouldPass(int[] input, int expectedOutput) {
+    public void countConsecutiveNumberRunsTest(int[] input, int expectedOutput) {
         System.out.printf("input:  %s\n", StringUtils.arrayAsString(input, 20));
         int output = countConsecutiveNumberRuns(input);
         System.out.printf("output: %d\n", output);
