@@ -164,7 +164,66 @@ public class ttt {
                 "-2-\n"
         ));
     }
+
+    @Test
+    public void When_player_one_fills_a_diagonal_bottom_left_to_top_right_then_the_game_ends() {
+        game.playerOneMove(new CellCoords(0, 2));
+        game.playerTwoMove(new CellCoords(0, 0));
+        game.playerOneMove(new CellCoords(1, 1));
+        game.playerTwoMove(new CellCoords(0, 1));
+        
+        assertThat(game.isOver(), is(false));
+        game.playerOneMove(new CellCoords(2, 0));
+        assertThat(game.isOver(), is(true));
+        
+        assertThat(game.getGridAsString(), is(
+                "2-1\n" +
+                "21-\n" +
+                "1--\n"
+        ));
+    }
+
+    @Test
+    public void When_player_one_fills_a_diagonal_top_left_to_bottom_right_then_the_game_ends() {
+        game.playerOneMove(new CellCoords(0, 0));
+        game.playerTwoMove(new CellCoords(0, 1));
+        game.playerOneMove(new CellCoords(1, 1));
+        game.playerTwoMove(new CellCoords(0, 2));
+
+        assertThat(game.isOver(), is(false));
+        game.playerOneMove(new CellCoords(2, 2));
+        assertThat(game.isOver(), is(true));
+
+        assertThat(game.getGridAsString(), is(
+                "1--\n" +
+                "21-\n" +
+                "2-1\n"
+        ));
+    }
     
+
+    @Test
+    public void When_player_two_fills_a_diagonal_top_left_to_bottom_right_then_the_game_ends() {
+        // Only test one of the diagonal wins for player two, because
+        // we sneakily know it uses the same code as the player one wins.
+        
+        game.playerOneMove(new CellCoords(0, 1));
+        game.playerTwoMove(new CellCoords(0, 0));
+        game.playerOneMove(new CellCoords(0, 2));
+        game.playerTwoMove(new CellCoords(1, 1));
+        game.playerOneMove(new CellCoords(1, 0));
+
+        assertThat(game.isOver(), is(false));
+        game.playerTwoMove(new CellCoords(2, 2));
+        assertThat(game.isOver(), is(true));
+
+        assertThat(game.getGridAsString(), is(
+                "21-\n" +
+                "12-\n" +
+                "1-2\n"
+        ));
+    }
+
     @Test
     public void When_player_two_has_won_player_one_cannot_move() {
         game.playerOneMove(new CellCoords(0,0));
@@ -226,11 +285,7 @@ public class ttt {
     }
 
     /* TODO:
-        player one wins with diagonal.
-        player two wins with diagonal.
         Game is over when there is a draw (all cells filled).
         bounds checks on CellCoords.{x, y}.
-    
-    
      */
 }

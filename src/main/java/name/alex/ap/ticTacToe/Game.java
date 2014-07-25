@@ -26,8 +26,8 @@ public class Game {
 
     private boolean playerHasWon(final CellState player) {
         return    playerHasWonWithHorizontalRow(player)
-               || playerHasWonWithVerticalColumn(player);
-        // TODO: Diagonals
+               || playerHasWonWithVerticalColumn(player)
+               || playerHasWonWithDiagonals(player);
     }
 
     private boolean playerHasWonWithHorizontalRow(CellState player) {
@@ -63,6 +63,22 @@ public class Game {
                     return true;
                 }
             }
+        }
+
+        return false;
+    }
+
+    private boolean playerHasWonWithDiagonals(CellState player) {
+        if(getCell(new CellCoords(0,0)) == player
+                && getCell(new CellCoords(1,1)) == player
+                && getCell(new CellCoords(2,2)) == player) {
+            return true;
+        }
+
+        if(getCell(new CellCoords(0,2)) == player
+                && getCell(new CellCoords(1,1)) == player
+                && getCell(new CellCoords(2,0)) == player) {
+            return true;
         }
 
         return false;
