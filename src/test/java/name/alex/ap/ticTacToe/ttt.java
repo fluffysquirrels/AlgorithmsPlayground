@@ -206,7 +206,7 @@ public class ttt {
     public void When_player_two_fills_a_diagonal_top_left_to_bottom_right_then_the_game_ends() {
         // Only test one of the diagonal wins for player two, because
         // we sneakily know it uses the same code as the player one wins.
-        
+
         game.playerOneMove(new CellCoords(0, 1));
         game.playerTwoMove(new CellCoords(0, 0));
         game.playerOneMove(new CellCoords(0, 2));
@@ -221,6 +221,28 @@ public class ttt {
                 "21-\n" +
                 "12-\n" +
                 "1-2\n"
+        ));
+    }
+
+    @Test
+    public void When_grid_is_filled_but_no_one_wins_the_game_is_over_in_a_draw() {
+        game.playerOneMove(new CellCoords(0, 0));
+        game.playerTwoMove(new CellCoords(2, 0));
+        game.playerOneMove(new CellCoords(1, 0));
+        game.playerTwoMove(new CellCoords(0, 1));
+        game.playerOneMove(new CellCoords(1, 1));
+        game.playerTwoMove(new CellCoords(1, 2));
+        game.playerOneMove(new CellCoords(2, 1));
+        game.playerTwoMove(new CellCoords(2, 2));
+
+        assertThat(game.isOver(), is(false));
+        game.playerOneMove(new CellCoords(0, 2));
+        assertThat(game.isOver(), is(true));
+
+        assertThat(game.getGridAsString(), is(
+                "112\n" +
+                "211\n" +
+                "122\n"
         ));
     }
 
@@ -285,7 +307,8 @@ public class ttt {
     }
 
     /* TODO:
-        Game is over when there is a draw (all cells filled).
         bounds checks on CellCoords.{x, y}.
+        Expose isDraw, playerOneHasWon, playerTwoHasWon?
+            (or GameState is in {Playing, Draw, PlayerOneHasOne, PlayerTwoHasWon})
      */
 }

@@ -12,8 +12,8 @@ public class Game {
 
     public boolean isOver(){
         return    playerOneHasWon()
-               || playerTwoHasWon();
-        // TODO: draws
+               || playerTwoHasWon()
+               || isDraw();
     }
 
     private boolean playerOneHasWon() {
@@ -82,6 +82,12 @@ public class Game {
         }
 
         return false;
+    }
+
+    private boolean isDraw() {
+        return  !playerOneHasWon()
+                && !playerTwoHasWon()
+                && numMoves == Grid.WIDTH * Grid.HEIGHT;
     }
 
     public void playerOneMove(CellCoords coords) {
