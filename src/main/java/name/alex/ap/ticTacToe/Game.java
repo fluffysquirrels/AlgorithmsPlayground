@@ -38,7 +38,7 @@ public class Game {
                     // and try the next row with the for(y) loop.
                     break;
                 }
-                
+
                 if(x == Grid.WIDTH - 1) {
                     // This player has the final cell in this row, so has won.
                     return true;

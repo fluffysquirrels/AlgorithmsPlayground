@@ -9,7 +9,7 @@ package name.alex.ap.ticTacToe;
 public class CellCoords {
     private final int x;
     private final int y;
-    
+
     public CellCoords(int x, int y) {
         if(x < 0) {
             throw new IllegalArgumentException("x cannot be < 0");

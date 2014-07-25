@@ -14,10 +14,10 @@ import org.testng.annotations.Test;
 
 public class ttt {
     private Game game = null;
-    
+
     private static final CellCoords anyCell = new CellCoords(0, 0);
     private static final CellCoords anotherCell = new CellCoords(1, 0);
-    
+
     @BeforeMethod
     public void beforeEachTest() {
         game = new Game();
@@ -50,7 +50,7 @@ public class ttt {
     public void Player_two_can_make_a_move_after_player_one_and_we_can_retrieve_both_moves_from_the_grid() {
         game.playerOneMove(anyCell);
         game.playerTwoMove(anotherCell);
-        
+
         assertThat(game.getCell(anyCell), is(CellValue.PlayerOne));
         assertThat(game.getCell(anotherCell), is(CellValue.PlayerTwo));
     }
@@ -171,11 +171,11 @@ public class ttt {
         game.playerTwoMove(new CellCoords(0, 0));
         game.playerOneMove(new CellCoords(1, 1));
         game.playerTwoMove(new CellCoords(0, 1));
-        
+
         assertThat(game.isOver(), is(false));
         game.playerOneMove(new CellCoords(2, 0));
         assertThat(game.isOver(), is(true));
-        
+
         assertThat(game.getGridAsString(), is(
                 "2-1\n" +
                 "21-\n" +
@@ -200,7 +200,7 @@ public class ttt {
                 "2-1\n"
         ));
     }
-    
+
 
     @Test
     public void When_player_two_fills_a_diagonal_top_left_to_bottom_right_then_the_game_ends() {
@@ -270,7 +270,7 @@ public class ttt {
         game.playerOneMove(new CellCoords(1,0));
         game.playerTwoMove(new CellCoords(1,1));
         game.playerOneMove(new CellCoords(2,0));
-        
+
 
         try{
             game.playerTwoMove(new CellCoords(2,1));

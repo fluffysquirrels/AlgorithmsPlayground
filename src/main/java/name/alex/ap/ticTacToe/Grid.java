@@ -43,7 +43,7 @@ class Grid {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        
+
         for(int y = 0; y < Grid.HEIGHT; ++y) {
             for(int x = 0; x < Grid.WIDTH; ++x) {
                 final CellValue cell = get(new CellCoords(x, y));
@@ -52,7 +52,7 @@ class Grid {
 
             sb.append("\n");
         }
-        
+
         return sb.toString();
     }
 }
