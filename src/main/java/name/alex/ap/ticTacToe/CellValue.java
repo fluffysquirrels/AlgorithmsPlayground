@@ -6,14 +6,14 @@
 
 package name.alex.ap.ticTacToe;
 
-public enum CellState {
+public enum CellValue {
     PlayerOne ("1"),
     PlayerTwo ("2"),
     Empty     ("-");
     
     private final String characterInGridString;
     
-    CellState(String characterInGridString) {
+    CellValue(String characterInGridString) {
         this.characterInGridString = characterInGridString;
     }
 

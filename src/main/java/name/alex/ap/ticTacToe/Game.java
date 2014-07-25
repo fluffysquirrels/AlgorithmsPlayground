@@ -17,20 +17,20 @@ public class Game {
     }
 
     private boolean playerOneHasWon() {
-        return playerHasWon(CellState.PlayerOne);
+        return playerHasWon(CellValue.PlayerOne);
     }
 
     private boolean playerTwoHasWon() {
-        return playerHasWon(CellState.PlayerTwo);
+        return playerHasWon(CellValue.PlayerTwo);
     }
 
-    private boolean playerHasWon(final CellState player) {
+    private boolean playerHasWon(final CellValue player) {
         return    playerHasWonWithHorizontalRow(player)
                || playerHasWonWithVerticalColumn(player)
                || playerHasWonWithDiagonals(player);
     }
 
-    private boolean playerHasWonWithHorizontalRow(CellState player) {
+    private boolean playerHasWonWithHorizontalRow(CellValue player) {
         for(int y = 0; y < Grid.HEIGHT; ++y){
             for(int x = 0; x < Grid.WIDTH; ++x) {
                 if(getCell(new CellCoords(x, y)) != player) {
@@ -49,7 +49,7 @@ public class Game {
         return false;
     }
 
-    private boolean playerHasWonWithVerticalColumn(CellState player) {
+    private boolean playerHasWonWithVerticalColumn(CellValue player) {
         for(int x = 0; x < Grid.WIDTH; ++x){
             for(int y = 0; y < Grid.HEIGHT; ++y) {
                 if(getCell(new CellCoords(x, y)) != player) {
@@ -68,7 +68,7 @@ public class Game {
         return false;
     }
 
-    private boolean playerHasWonWithDiagonals(CellState player) {
+    private boolean playerHasWonWithDiagonals(CellValue player) {
         if(getCell(new CellCoords(0,0)) == player
                 && getCell(new CellCoords(1,1)) == player
                 && getCell(new CellCoords(2,2)) == player) {
@@ -97,7 +97,7 @@ public class Game {
 
         assertGameNotOver();
 
-        grid.set(coords, CellState.PlayerOne);
+        grid.set(coords, CellValue.PlayerOne);
         ++numMoves;
     }
 
@@ -108,7 +108,7 @@ public class Game {
 
         assertGameNotOver();
 
-        grid.set(coords, CellState.PlayerTwo);
+        grid.set(coords, CellValue.PlayerTwo);
         ++numMoves;
     }
 
@@ -118,7 +118,7 @@ public class Game {
         }
     }
 
-    public CellState getCell(CellCoords coords) {
+    public CellValue getCell(CellCoords coords) {
         return grid.get(coords);
     }
 

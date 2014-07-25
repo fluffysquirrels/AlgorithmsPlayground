@@ -30,9 +30,9 @@ public class ttt {
 
     @Test
     public void When_player_one_makes_a_move_we_can_retrieve_it_from_the_grid(){
-        assertThat(game.getCell(anyCell), is(CellState.Empty));
+        assertThat(game.getCell(anyCell), is(CellValue.Empty));
         game.playerOneMove(anyCell);
-        assertThat(game.getCell(anyCell), is(CellState.PlayerOne));
+        assertThat(game.getCell(anyCell), is(CellValue.PlayerOne));
     }
 
     @Test(expectedExceptions = IllegalStateException.class)
@@ -51,8 +51,8 @@ public class ttt {
         game.playerOneMove(anyCell);
         game.playerTwoMove(anotherCell);
         
-        assertThat(game.getCell(anyCell), is(CellState.PlayerOne));
-        assertThat(game.getCell(anotherCell), is(CellState.PlayerTwo));
+        assertThat(game.getCell(anyCell), is(CellValue.PlayerOne));
+        assertThat(game.getCell(anotherCell), is(CellValue.PlayerTwo));
     }
 
     @Test(expectedExceptions = IllegalStateException.class)
@@ -310,5 +310,6 @@ public class ttt {
         bounds checks on CellCoords.{x, y}.
         Expose isDraw, playerOneHasWon, playerTwoHasWon?
             (or GameState is in {Playing, Draw, PlayerOneHasOne, PlayerTwoHasWon})
+        Extract some of Game? It's currently a chunky 129 lines.
      */
 }
