@@ -11,6 +11,18 @@ public class CellCoords {
     private final int y;
     
     public CellCoords(int x, int y) {
+        if(x < 0) {
+            throw new IllegalArgumentException("x cannot be < 0");
+        }
+        if(x >= Grid.WIDTH) {
+            throw new IllegalArgumentException("x cannot be >= Grid.WIDTH");
+        }
+        if(y < 0) {
+            throw new IllegalArgumentException("y cannot be < 0");
+        }
+        if(y >= Grid.HEIGHT) {
+            throw new IllegalArgumentException("y cannot be >= Grid.HEIGHT");
+        }
         this.x = x;
         this.y = y;
     }

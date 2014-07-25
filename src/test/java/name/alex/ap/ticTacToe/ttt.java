@@ -306,10 +306,30 @@ public class ttt {
         ));
     }
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void CellCoords_x_cannot_be_negative(){
+        new CellCoords(-1, 0);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void CellCoords_x_cannot_be_beyond_width(){
+        new CellCoords(3, 0);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void CellCoords_y_cannot_be_negative(){
+        new CellCoords(0, -1);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void CellCoords_y_cannot_be_beyond_height(){
+        new CellCoords(0, 3);
+    }
+
     /* TODO:
-        bounds checks on CellCoords.{x, y}.
         Expose isDraw, playerOneHasWon, playerTwoHasWon?
             (or GameState is in {Playing, Draw, PlayerOneHasOne, PlayerTwoHasWon})
-        Extract some of Game? It's currently a chunky 129 lines.
+        Extract some of Game? It's currently a chunky 129 lines, with 79 lines
+            deciding whether the game is over.
      */
 }
