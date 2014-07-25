@@ -62,7 +62,7 @@ public class ttt {
     }
 
     @Test
-    public void When_player_one_fills_a_horizontal_row_then_game_ends() {
+    public void When_player_one_fills_any_horizontal_row_then_game_ends() {
         // Test all three possible horizontal rows in case there is e.g. an off by
         // one error somewhere.
         test_player_one_horizontal_row_example(0, 1);
@@ -90,7 +90,7 @@ public class ttt {
     @Test
     public void When_player_two_fills_a_horizontal_row_then_game_ends() {
         // Test only one possible horizontal row because we sneakily know this
-        /// re-uses the same code as player one winning.
+        // re-uses the same code as player one winning.
 
         game.playerOneMove(new CellCoords(0,0));
         game.playerTwoMove(new CellCoords(0,1));
@@ -107,6 +107,52 @@ public class ttt {
                 is(true));
     }
 
+    @Test
+    public void When_player_one_fills_any_vertical_column_then_game_ends() {
+        // Test all three possible vertical columns in case there is e.g. an off by
+        // one error somewhere.
+        test_player_one_vertical_column_example(0, 1);
+        test_player_one_vertical_column_example(1, 2);
+        test_player_one_vertical_column_example(2, 0);
+    }
+
+    private static void test_player_one_vertical_column_example(int xPlayerOne, int xPlayerTwo) {
+        final Game game = new Game();
+
+        game.playerOneMove(new CellCoords(xPlayerOne,0));
+        game.playerTwoMove(new CellCoords(xPlayerTwo,0));
+        game.playerOneMove(new CellCoords(xPlayerOne,1));
+        game.playerTwoMove(new CellCoords(xPlayerTwo,1));
+
+        assertThat("Expected game not to be over before player one completes their column",
+                game.isOver(),
+                is(false));
+        game.playerOneMove(new CellCoords(xPlayerOne,2));
+        assertThat("Expected game to be over once player one completes their column",
+                game.isOver(),
+                is(true));
+    }
+
+    @Test
+    public void When_player_two_fills_a_vertical_column_then_game_ends() {
+        // Test only one possible vertical column because we sneakily know this
+        // re-uses the same code as player one winning.
+
+        game.playerOneMove(new CellCoords(0,0));
+        game.playerTwoMove(new CellCoords(1,0));
+        game.playerOneMove(new CellCoords(0,1));
+        game.playerTwoMove(new CellCoords(1,1));
+        game.playerOneMove(new CellCoords(2,0));
+
+        assertThat("Expected game not to be over before player two completes their column",
+                game.isOver(),
+                is(false));
+        game.playerTwoMove(new CellCoords(1,2));
+        assertThat("Expected game to be over once player two completes their column",
+                game.isOver(),
+                is(true));
+    }
+    
     @Test
     public void When_player_two_has_won_player_one_cannot_move() {
         game.playerOneMove(new CellCoords(0,0));
@@ -142,8 +188,6 @@ public class ttt {
     }
     
     /* TODO:
-        player one wins with vertical column.
-        player two wins with vertical column.
         player one wins with diagonal.
         player two wins with diagonal.
         Game is over when there is a draw (all cells filled).

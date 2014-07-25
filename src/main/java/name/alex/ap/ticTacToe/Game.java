@@ -25,8 +25,9 @@ public class Game {
     }
 
     private boolean playerHasWon(final CellState player) {
-        return playerHasWonWithHorizontalRow(player);
-        // TODO: Vertical columns, diagonals
+        return    playerHasWonWithHorizontalRow(player)
+               || playerHasWonWithVerticalColumn(player);
+        // TODO: Diagonals
     }
 
     private boolean playerHasWonWithHorizontalRow(CellState player) {
@@ -39,6 +40,26 @@ public class Game {
                 }
                 
                 if(x == Grid.WIDTH - 1) {
+                    // This player has the final cell in this row, so has won.
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean playerHasWonWithVerticalColumn(CellState player) {
+        for(int x = 0; x < Grid.WIDTH; ++x){
+            for(int y = 0; y < Grid.HEIGHT; ++y) {
+                if(getCell(new CellCoords(x, y)) != player) {
+                    // Player hasn't won with this column, break out of the for(y) loop,
+                    // and try the next row with the for(x) loop.
+                    break;
+                }
+
+                if(y == Grid.HEIGHT - 1) {
+                    // This player has the final cell in this column, so has won.
                     return true;
                 }
             }
@@ -78,4 +99,5 @@ public class Game {
     public CellState getCell(CellCoords coords) {
         return grid.get(coords);
     }
+
 }
